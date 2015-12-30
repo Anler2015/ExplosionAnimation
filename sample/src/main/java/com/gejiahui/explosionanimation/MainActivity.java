@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.gejiahui.library.explosionanimation.ExplosionField;
 import com.gejiahui.library.explosionanimation.particle.ExplodeParticle;
 import com.gejiahui.library.explosionanimation.particle.FlyAwayParticle;
+import com.gejiahui.library.explosionanimation.particle.LeftParticle;
 import com.gejiahui.library.explosionanimation.particle.RightParticle;
 
 /**

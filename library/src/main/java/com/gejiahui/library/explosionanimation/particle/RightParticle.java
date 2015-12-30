@@ -10,6 +10,7 @@ import java.util.Random;
 public class RightParticle extends Particle {
     private static final float V = Utils.dp2px(2);
     Random random = new Random(System.currentTimeMillis());
+    int stand ;
     @Override
     public void advance(float fraction) {
         float f = 0f;
@@ -24,14 +25,17 @@ public class RightParticle extends Particle {
             f = (normalization - 0.7f) / 0.3f;
         }
         alpha = 1f - f;
-        f = bottom * f2;
         radius = V + (baseRadius - V) * f2;
-        cx = cx + fraction * random.nextInt((int)top)*random.nextFloat();
+        f = bottom * f2;
+        cx = baseCx + stand * f2;
         cy = (float) (baseCy - this.neg * Math.pow(f, 2.0)) ;
+
     }
 
     @Override
     public Particle newInstance() {
-        return new RightParticle();
+        RightParticle particle =  new RightParticle();
+        particle.stand = random.nextInt(500);
+        return particle;
     }
 }

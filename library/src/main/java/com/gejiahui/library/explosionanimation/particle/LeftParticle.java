@@ -1,5 +1,7 @@
 package com.gejiahui.library.explosionanimation.particle;
 
+import android.graphics.Paint;
+
 import com.gejiahui.library.explosionanimation.Utils;
 
 import java.util.Random;
@@ -7,11 +9,10 @@ import java.util.Random;
 /**
  * Created by gejiahui on 2015/12/30.
  */
-public class FlyAwayParticle extends Particle {
+public class LeftParticle extends Particle {
     private static final float V = Utils.dp2px(2);
     Random random = new Random(System.currentTimeMillis());
-    int standx ;
-    int standy ;
+    int stand ;
     @Override
     public void advance(float fraction) {
         float f = 0f;
@@ -28,16 +29,15 @@ public class FlyAwayParticle extends Particle {
         alpha = 1f - f;
         radius = V + (baseRadius - V) * f2;
         f = bottom * f2;
-        cx = baseCx + standx * f2;
-        cy = (float) (baseCy + this.neg * Math.pow(f, 2.0)) ;
+        cx = baseCx - stand * f2;
+        cy = (float) (baseCy - this.neg * Math.pow(f, 2.0)) ;
 
     }
 
     @Override
     public Particle newInstance() {
-        FlyAwayParticle particle =  new FlyAwayParticle();
-        particle.standx = random.nextInt(600);
-        particle.standy = random.nextInt(400);
+        LeftParticle particle =  new LeftParticle();
+        particle.stand = random.nextInt(300);
         return particle;
     }
 }
