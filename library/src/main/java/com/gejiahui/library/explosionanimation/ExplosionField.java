@@ -42,10 +42,7 @@ public class ExplosionField extends View {
         view.getGlobalVisibleRect(rect);
 
         int contentTop = ((ViewGroup)getParent()).getTop();
-        Rect frame = new Rect();
-        ((Activity) getContext()).getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-        int statusBarHeight = frame.top;
-        rect.offset(0, -contentTop - statusBarHeight);//去掉状态栏高度和标题栏高度
+        rect.offset(0, -contentTop );//去掉状态栏高度和标题栏高度
 
         ValueAnimator animator = ValueAnimator.ofFloat(0,1).setDuration(150);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

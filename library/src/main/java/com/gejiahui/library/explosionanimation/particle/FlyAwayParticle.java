@@ -10,6 +10,7 @@ import java.util.Random;
 public class FlyAwayParticle extends Particle {
     private static final float V = Utils.dp2px(2);
     Random random = new Random(System.currentTimeMillis());
+    int stand ;
     @Override
     public void advance(float fraction) {
         float f = 0f;
@@ -25,13 +26,17 @@ public class FlyAwayParticle extends Particle {
         }
         alpha = 1f - f;
         radius = V + (baseRadius - V) * f2;
-        cx = cx + fraction * random.nextInt((int)top)*random.nextFloat();
-        cy = cy - fraction * random.nextInt((int)top)*random.nextFloat();
+//        cx = cx + fraction *(int)top*random.nextFloat();
+//        cy = cy - fraction * (int)top*random.nextFloat();
+        f = bottom * f2;
+        cy = cy + stand * f2;
+        cx = (float) (baseCx - this.neg * Math.pow(f, 2.0)) ;
 
     }
 
     @Override
     public Particle newInstance() {
+        stand = random.nextInt(4000);
         return new FlyAwayParticle();
     }
 }
