@@ -26,7 +26,7 @@ public class ExplosionAnimator extends ValueAnimator {
     private static final float Y = Utils.dp2px(20);
     private static final float V = Utils.dp2px(2);
     private static final float W = Utils.dp2px(1);
-    private int partLen =15;
+    private int partLen =4;
     private Paint mPaint;
     private Particle[][] mParticles ;
     private View mContainer;
@@ -59,7 +59,8 @@ public class ExplosionAnimator extends ValueAnimator {
 
     public Particle generateParticle(int color,Random random,Particle p){
         Particle particle = p.newInstance();
-        particle.color = color;
+    //    particle.color = color;
+        particle.color = Color.rgb(random.nextInt(255),random.nextInt(255),random.nextInt(255));
         particle.radius = V;
         if (random.nextFloat() < 0.2f) {
             particle.baseRadius = V + ((X - V) * random.nextFloat());

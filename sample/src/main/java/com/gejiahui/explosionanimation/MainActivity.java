@@ -26,7 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         mExplosionField = ExplosionField.attach2Window(this);
-        addListener(findViewById(R.id.root));
+   //     addListener(findViewById(R.id.root));
 
         ImageView img1 = (ImageView)findViewById(R.id.img1);
         ImageView img2 = (ImageView)findViewById(R.id.img2);
@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//      mExplosionField.explode(event, new RightParticle());
+      mExplosionField.explode(event, new RightParticle());
         return true;
     }
 

@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -73,13 +74,13 @@ public class ExplosionField extends View {
     }
 
 
-//    public void explode(MotionEvent event,Particle particle){
-//        int x = (int)event.getX();
-//        int y = (int)event.getY();
-//        int rectRaduis = 20;
-//
-//
-//    }
+    public void explode(MotionEvent event,Particle particle){
+        int x = (int)event.getX();
+        int y = (int)event.getY();
+        int rectRaduis = 20;
+        Rect rect = new Rect(x-200,y-200,x+200,y+200);
+        explode(Utils.createBitmapFromView(this), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle);
+    }
 
 
     @Override
