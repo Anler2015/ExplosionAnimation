@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-      mExplosionField.explode(event, new RightParticle());
+      mExplosionField.explode(event, new LeftParticle());
         return true;
     }
 

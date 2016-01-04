@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,11 +57,11 @@ public class ExplosionField extends View {
         animator.start();
         view.animate().alpha(0).scaleY(0).scaleX(0).setStartDelay(100).setDuration(150).start();
         //接下来爆炸
-        explode(Utils.createBitmapFromView(view), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle);
+        explode(Utils.createBitmapFromView(view), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle,0);
     }
 
-    public void explode(Bitmap bitmap, Rect bound, long startDelay, long duration,Particle particle) {
-        final ExplosionAnimator explosion = new ExplosionAnimator(this, bitmap, bound,particle);
+    public void explode(Bitmap bitmap, Rect bound, long startDelay, long duration,Particle particle,int mode) {
+        final ExplosionAnimator explosion = new ExplosionAnimator(this, bitmap, bound,particle,mode);
         explosion.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -77,16 +78,17 @@ public class ExplosionField extends View {
     public void explode(MotionEvent event,Particle particle){
         int x = (int)event.getX();
         int y = (int)event.getY();
-        int rectRaduis = 20;
         Rect rect = new Rect(x-200,y-200,x+200,y+200);
-        explode(Utils.createBitmapFromView(this), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle);
+        int contentTop = ((ViewGroup)getParent()).getTop();
+        rect.offset(0, -contentTop );//去掉状态栏高度和标题栏高度
+
+        explode(Utils.createBitmapFromView(this), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle,1);
     }
 
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         for (ExplosionAnimator explosion : mExplosions) {
             explosion.draw(canvas);
         }

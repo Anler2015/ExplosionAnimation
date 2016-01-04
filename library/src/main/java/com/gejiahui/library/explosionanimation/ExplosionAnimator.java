@@ -26,41 +26,55 @@ public class ExplosionAnimator extends ValueAnimator {
     private static final float Y = Utils.dp2px(20);
     private static final float V = Utils.dp2px(2);
     private static final float W = Utils.dp2px(1);
-    private int partLen =4;
+    private int partLen =15;
+    private int partLenForTouch =2;
     private Paint mPaint;
     private Particle[][] mParticles ;
     private View mContainer;
     private Rect mBound;
 
-    public ExplosionAnimator(View container, Bitmap bitmap, Rect bound, Particle particle) {
+    public ExplosionAnimator(View container, Bitmap bitmap, Rect bound, Particle particle,int mode) {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mContainer = container;
         mBound = new Rect(bound);
         Random random = new Random(System.currentTimeMillis());
-        generateParticles(bitmap,random,particle);
+        generateParticles(bitmap,random,particle,mode);
         setDuration(DEFAULT_DURATION);
         setInterpolator(DEFAULT_INTERPOLATOR);
         setFloatValues(0f,1.4f);
     }
 
 
-    public void  generateParticles(Bitmap bitmap ,Random random,Particle particle){
-        int w = bitmap.getWidth() / (partLen+2);
-        int h = bitmap.getHeight() / (partLen+2) ;
-        mParticles = new Particle[partLen][partLen];
-        for (int i = 0; i < partLen; i++) {
-            for (int j = 0; j < partLen; j++) {
-                mParticles[i][j] = generateParticle( bitmap.getPixel((i+1)*w,(j+1)*h),random, particle);
+    public void  generateParticles(Bitmap bitmap ,Random random,Particle particle,int mode){
+        int w = 0,h = 0,parts = 0;
+        if(mode == 0){
+            parts = partLen;
+        }
+        else{
+           parts = partLenForTouch;
+        }
+        w = bitmap.getWidth() / (parts+2);
+        h = bitmap.getHeight() / (parts+2) ;
+        mParticles = new Particle[parts][parts];
+        for (int i = 0; i < parts; i++) {
+            for (int j = 0; j < parts; j++) {
+                mParticles[i][j] = generateParticle( bitmap.getPixel((i+1)*w,(j+1)*h),random, particle, mode);
             }
         }
 
     }
 
 
-    public Particle generateParticle(int color,Random random,Particle p){
+
+    public Particle generateParticle(int color,Random random,Particle p,int mode){
+
         Particle particle = p.newInstance();
-    //    particle.color = color;
-        particle.color = Color.rgb(random.nextInt(255),random.nextInt(255),random.nextInt(255));
+        if(mode == 0){
+            particle.color = color;
+        }
+        else{
+            particle.color = Color.rgb(random.nextInt(255),random.nextInt(255),random.nextInt(255));
+        }
         particle.radius = V;
         if (random.nextFloat() < 0.2f) {
             particle.baseRadius = V + ((X - V) * random.nextFloat());
@@ -86,6 +100,11 @@ public class ExplosionAnimator extends ValueAnimator {
         particle.alpha = 1f;
         return particle;
     }
+
+
+
+
+
 
 
     public void draw(Canvas canvas){
