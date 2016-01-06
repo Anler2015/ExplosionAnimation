@@ -1,5 +1,8 @@
 package com.gejiahui.explosionanimation;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -41,8 +44,8 @@ public class ExplodeViewFragment extends Fragment {
 
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
-            switch(v.getId()){
+        public void onClick(final View v) {
+            switch (v.getId()) {
                 case R.id.img1:
                     mExplosionField.explode(v, new RightParticle());
                     break;
@@ -53,6 +56,17 @@ public class ExplodeViewFragment extends Fragment {
                     mExplosionField.explode(v, new ExplodeParticle());
                     break;
             }
+            ValueAnimator valueAnimator = new ValueAnimator().ofFloat(1).setDuration(1700);
+            valueAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    v.animate().alpha(1).scaleY(1).scaleX(1).setDuration(150).start();
+                }
+            });
+            valueAnimator.start();
         }
+
+
     };
+
 }
