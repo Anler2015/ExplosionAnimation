@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         ExplodeViewFragment explodeViewFragment = new ExplodeViewFragment();
+        ListFragment listFragment = new ListFragment();
         list.add(explodeViewFragment);
+        list.add(listFragment);
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(),list);
         viewPager.setAdapter(adapter);
 
