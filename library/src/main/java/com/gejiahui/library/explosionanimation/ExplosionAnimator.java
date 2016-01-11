@@ -27,7 +27,7 @@ public class ExplosionAnimator extends ValueAnimator {
     private static final float V = Utils.dp2px(2);
     private static final float W = Utils.dp2px(1);
     private int partLen =15;
-    private int partLenForTouch =2;
+    private int partLenForTouch =3;
     private Paint mPaint;
     private Particle[][] mParticles ;
     private View mContainer;

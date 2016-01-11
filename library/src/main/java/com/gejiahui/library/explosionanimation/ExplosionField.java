@@ -81,8 +81,8 @@ public class ExplosionField extends View {
         int x = (int)event.getX();
         int y = (int)event.getY();
         Rect rect = new Rect(x-200,y-200,x+200,y+200);
-        int contentTop = ((ViewGroup)getParent()).getTop();
-        rect.offset(0, -contentTop );//去掉状态栏高度和标题栏高度
+//        int contentTop = ((ViewGroup)getParent()).getTop();
+//        rect.offset(0, -contentTop );//去掉状态栏高度和标题栏高度
 
         explode(Utils.createBitmapFromView(this), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle,1);
     }

@@ -86,6 +86,14 @@ public class ListActivity extends Activity {
             }
             TextView txt = (TextView)view.findViewById(R.id.txt);
             txt.setText(mDatas.get(position));
+            txt.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Log.v("gjh",event.getX()+" : "+ event.getY());
+                    mExplosionField.explode(event,new LeftParticle());
+                    return false;
+                }
+            });
             return view;
         }
     }
