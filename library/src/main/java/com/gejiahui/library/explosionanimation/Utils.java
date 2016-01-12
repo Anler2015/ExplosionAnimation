@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 /**
@@ -43,6 +44,38 @@ public class Utils {
         }
         return bitmap;
     }
+
+    public static Bitmap createBitmapFromViewGroup(ViewGroup viewGroup){
+        Bitmap bitmap;
+        viewGroup.clearFocus();
+        bitmap = createBitmapSafely(viewGroup.getWidth(),viewGroup.getHeight(), Bitmap.Config.ARGB_8888,1);
+
+        synchronized (mCanvas){
+            Canvas canvas = mCanvas;
+            canvas.setBitmap(bitmap);
+            for(int i = 0; i < viewGroup.getChildCount(); i++) {
+                if (viewGroup.getChildAt(i) instanceof ViewGroup){
+
+                }
+
+                viewGroup.getChildAt(i).draw(canvas);
+                canvas.setBitmap(null);
+            }
+        }
+
+
+
+
+
+
+        return bitmap;
+    }
+
+
+
+
+
+
 
     public static Bitmap createBitmapSafely(int width,int height,Bitmap.Config config,int retryCount){
         try{

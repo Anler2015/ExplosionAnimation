@@ -16,11 +16,10 @@ import com.gejiahui.library.explosionanimation.particle.LeftParticle;
  */
 public class ExplosionLayout extends FrameLayout {
     private int mX,mY;
-    private int mLastX,mLastY,firstX;
+    private int firstX;
     private int scrollX;
     private ViewGroup backLayout;
     private boolean wantToSwap = false;
-    private boolean isDelete = false;
     private OnDeleteListener mDeleteListener;
     public interface OnDeleteListener{
         void onDelete();
@@ -87,17 +86,11 @@ public class ExplosionLayout extends FrameLayout {
                 getParent().requestDisallowInterceptTouchEvent(false);
                 //want to delete
                 if(firstX - mX >= backLayout.getWidth()/2){
-                    isDelete = true;
-                    Log.v("gjh",isDelete+"");
                     if(mDeleteListener != null){
                         mDeleteListener.onDelete();
                     }
                 }
-
-
                 scrollX = 0;
-
-
                 wantToSwap = false;
 
                 break;
