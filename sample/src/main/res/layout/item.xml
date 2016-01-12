@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.gejiahui.library.explosionanimation.ExplosionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:id="@+id/layout">
 
-
-    <TextView
-        android:id="@+id/txt"
-        android:padding="3dp"
-        android:background="#888888"
-        android:gravity="center"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/txt"
+            android:padding="3dp"
+            android:background="#888888"
+            android:gravity="center"
+            android:layout_width="360dp"
+            android:layout_height="50dp" />
+
+    </LinearLayout>
+
+
+</com.gejiahui.library.explosionanimation.ExplosionLayout>
