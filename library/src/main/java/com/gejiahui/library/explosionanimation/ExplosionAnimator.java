@@ -54,12 +54,19 @@ public class ExplosionAnimator extends ValueAnimator {
         else{
            parts = partLenForTouch;
         }
-        w = bitmap.getWidth() / (parts+2);
-        h = bitmap.getHeight() / (parts+2) ;
+        w = mBound.width() / (parts+2);
+        h = mBound.height() / (parts+2) ;
         mParticles = new Particle[parts][parts];
         for (int i = 0; i < parts; i++) {
             for (int j = 0; j < parts; j++) {
-                mParticles[i][j] = generateParticle( bitmap.getPixel((i+1)*w,(j+1)*h),random, particle, mode);
+                if(mode == 0){
+                    mParticles[i][j] = generateParticle( bitmap.getPixel((i+1)*w,(j+1)*h),random, particle);
+                }
+                else{
+                    int color = Color.rgb(random.nextInt(255),random.nextInt(255),random.nextInt(255));
+                    mParticles[i][j] = generateParticle( color,random, particle);
+                }
+
             }
         }
 
@@ -67,15 +74,9 @@ public class ExplosionAnimator extends ValueAnimator {
 
 
 
-    public Particle generateParticle(int color,Random random,Particle p,int mode){
-
+    public Particle generateParticle(int color,Random random,Particle p){
         Particle particle = p.newInstance();
-        if(mode == 0){
-            particle.color = color;
-        }
-        else{
-            particle.color = Color.rgb(random.nextInt(255),random.nextInt(255),random.nextInt(255));
-        }
+        particle.color = color;
         particle.radius = V;
         if (random.nextFloat() < 0.2f) {
             particle.baseRadius = V + ((X - V) * random.nextFloat());
@@ -101,10 +102,6 @@ public class ExplosionAnimator extends ValueAnimator {
         particle.alpha = 1f;
         return particle;
     }
-
-
-
-
 
 
 

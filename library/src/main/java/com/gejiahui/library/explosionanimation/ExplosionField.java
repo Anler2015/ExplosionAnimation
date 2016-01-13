@@ -85,7 +85,7 @@ public class ExplosionField extends View {
         int contentTop = ((ViewGroup)getParent()).getTop();
         rect.offset(0, -contentTop );//去掉状态栏高度和标题栏高度
 
-//        explode(Utils.createBitmapFromView(this), rect, 100, 2000, particle,1);
+        explode(null, rect, 100, 2000, particle,1);
     }
 
 
