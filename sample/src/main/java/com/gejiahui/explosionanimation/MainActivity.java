@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.gejiahui.library.explosionanimation.ExplosionField;
 import com.gejiahui.library.explosionanimation.particle.ExplodeParticle;
@@ -22,7 +24,7 @@ import com.gejiahui.library.explosionanimation.particle.RightParticle;
 
 import java.util.ArrayList;
 
-import static com.gejiahui.library.explosionanimation.Utils.createBitmapFromViewGroup;
+
 
 /**
  * Created by gejiahui on 2015/12/28.
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ExplosionField mExplosionField;
     ImageView img1;
-    ImageView img2;
+    TextView img2;
     ImageView img3;
     private ArrayList<Fragment> list = new ArrayList<Fragment>();
 
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         mExplosionField = ExplosionField.attach2Window(this);
         img1 = (ImageView) findViewById(R.id.img1);
-        img2 = (ImageView) findViewById(R.id.img2);
+        img2 = (TextView) findViewById(R.id.img2);
         img3 = (ImageView) findViewById(R.id.img3);
         LinearLayout layout = (LinearLayout)findViewById(R.id.layout);
         mExplosionField = ExplosionField.attach2Window(this);
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mExplosionField.explode(v, new FlyAwayParticle());
+                    mExplosionField.explode(MainActivity.this,v, new FlyAwayParticle());
                     v.setOnClickListener(null);
                 }
             });
@@ -77,17 +79,17 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(final View v) {
             switch (v.getId()) {
                 case R.id.img1:
-                    mExplosionField.explode(v, new RightParticle());
+                    mExplosionField.explode(MainActivity.this, v, new RightParticle());
                     break;
                 case R.id.img2:
-                    mExplosionField.explode(v, new FlyAwayParticle());
+                    mExplosionField.explode(MainActivity.this, v, new ExplodeParticle());
                     break;
                 case R.id.img3:
-                    mExplosionField.explode(v, new ExplodeParticle());
+                    mExplosionField.explode(MainActivity.this, v, new ExplodeParticle());
                     break;
                 case R.id.layout:
-                    mExplosionField.explode1(MainActivity.this,(ViewGroup) v, new ExplodeParticle());
-                    img1.setImageBitmap(createBitmapFromViewGroup(MainActivity.this,(ViewGroup) v));
+                    mExplosionField.explode(MainActivity.this, v, new ExplodeParticle());
+
                     break;
             }
             ValueAnimator valueAnimator = new ValueAnimator().ofFloat(1).setDuration(1700);
@@ -121,8 +123,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(MainActivity.this,ListActivity.class);
             startActivity(intent);
-
-
             return true;
         }
         return super.onOptionsItemSelected(item);
