@@ -1,12 +1,17 @@
 package com.gejiahui.library.explosionanimation;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 /**
@@ -45,35 +50,21 @@ public class Utils {
         return bitmap;
     }
 
-    public static Bitmap createBitmapFromViewGroup(ViewGroup viewGroup){
+    public static Bitmap createBitmapFromViewGroup(Context context, ViewGroup viewGroup){
         Bitmap bitmap;
-        viewGroup.clearFocus();
-        bitmap = createBitmapSafely(viewGroup.getWidth(),viewGroup.getHeight(), Bitmap.Config.ARGB_8888,1);
+        Rect rect = new Rect();
+        viewGroup.getGlobalVisibleRect(rect);
 
-        synchronized (mCanvas){
-            Canvas canvas = mCanvas;
-            canvas.setBitmap(bitmap);
-            for(int i = 0; i < viewGroup.getChildCount(); i++) {
-                if (viewGroup.getChildAt(i) instanceof ViewGroup){
-
-                }
-
-                viewGroup.getChildAt(i).draw(canvas);
-                canvas.setBitmap(null);
-            }
-        }
-
-
-
-
-
-
+        View view = ((Activity)context).getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap background = view.getDrawingCache();
+        bitmap = Bitmap.createBitmap(background,rect.left,rect.top,rect.width(),rect.height());
+        view.destroyDrawingCache();
+        view.setDrawingCacheEnabled(false);
+        background.recycle();
         return bitmap;
     }
-
-
-
-
 
 
 

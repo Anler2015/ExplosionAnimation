@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.gejiahui.library.explosionanimation.ExplosionField;
 import com.gejiahui.library.explosionanimation.particle.ExplodeParticle;
@@ -21,13 +22,17 @@ import com.gejiahui.library.explosionanimation.particle.RightParticle;
 
 import java.util.ArrayList;
 
+import static com.gejiahui.library.explosionanimation.Utils.createBitmapFromViewGroup;
+
 /**
  * Created by gejiahui on 2015/12/28.
  */
 public class MainActivity extends AppCompatActivity {
 
     private ExplosionField mExplosionField;
-
+    ImageView img1;
+    ImageView img2;
+    ImageView img3;
     private ArrayList<Fragment> list = new ArrayList<Fragment>();
 
     @Override
@@ -35,14 +40,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         mExplosionField = ExplosionField.attach2Window(this);
-        ImageView img1 = (ImageView) findViewById(R.id.img1);
-        ImageView img2 = (ImageView) findViewById(R.id.img2);
-        ImageView img3 = (ImageView) findViewById(R.id.img3);
+        img1 = (ImageView) findViewById(R.id.img1);
+        img2 = (ImageView) findViewById(R.id.img2);
+        img3 = (ImageView) findViewById(R.id.img3);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.layout);
         mExplosionField = ExplosionField.attach2Window(this);
         img1.setOnClickListener(clickListener);
         img2.setOnClickListener(clickListener);
         img3.setOnClickListener(clickListener);
-
+        layout.setOnClickListener(clickListener);
 
     }
 
@@ -78,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.img3:
                     mExplosionField.explode(v, new ExplodeParticle());
+                    break;
+                case R.id.layout:
+                    mExplosionField.explode1(MainActivity.this,(ViewGroup) v, new ExplodeParticle());
+                    img1.setImageBitmap(createBitmapFromViewGroup(MainActivity.this,(ViewGroup) v));
                     break;
             }
             ValueAnimator valueAnimator = new ValueAnimator().ofFloat(1).setDuration(1700);

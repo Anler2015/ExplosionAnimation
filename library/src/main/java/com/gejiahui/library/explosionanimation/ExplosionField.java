@@ -62,7 +62,32 @@ public class ExplosionField extends View {
         explode(Utils.createBitmapFromView(view), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle,0);
     }
 
-    public void explode(Bitmap bitmap, Rect bound, long startDelay, long duration,Particle particle,int mode) {
+    public void explode1(Context context,final ViewGroup view,Particle particle){
+        Rect rect = new Rect();
+        view.getGlobalVisibleRect(rect);
+        Rect frame = new Rect();
+        ((Activity)getContext()).getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+        int contentTop = ((ViewGroup)getParent()).getTop();
+        rect.offset(0, -contentTop-statusBarHeight );//去掉状态栏高度和标题栏高度
+
+        ValueAnimator animator = ValueAnimator.ofFloat(0,1).setDuration(150);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                view.setTranslationX((random.nextFloat() - 0.5f) * view.getWidth() * 0.05f);
+                view.setTranslationY((random.nextFloat() - 0.5f) * view.getHeight() * 0.05f);
+            }
+        });
+        animator.start();
+        view.animate().alpha(0).scaleY(0).scaleX(0).setStartDelay(100).setDuration(150).start();
+        //接下来爆炸
+        explode(Utils.createBitmapFromViewGroup(context,view), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle,0);
+    }
+
+
+
+    private void explode(Bitmap bitmap, Rect bound, long startDelay, long duration,Particle particle,int mode) {
         final ExplosionAnimator explosion = new ExplosionAnimator(this, bitmap, bound,particle,mode);
         explosion.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -75,6 +100,7 @@ public class ExplosionField extends View {
         mExplosions.add(explosion);
         explosion.start();
     }
+
 
 
     public void explode(int x,int y,Particle particle){
