@@ -46,8 +46,7 @@ public class ExplosionField extends View {
         ((Activity)getContext()).getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         int statusBarHeight = frame.top;
         int contentTop = ((ViewGroup)getParent()).getTop();
-        rect.offset(0, -contentTop-statusBarHeight );//去掉状态栏高度和标题栏高度
-
+        rect.offset(0, -contentTop-statusBarHeight );
         ValueAnimator animator = ValueAnimator.ofFloat(0,1).setDuration(150);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -58,8 +57,7 @@ public class ExplosionField extends View {
         });
         animator.start();
         view.animate().alpha(0).scaleY(0).scaleX(0).setStartDelay(100).setDuration(150).start();
-        //接下来爆炸
-        explode(Utils.createBitmapFromView(context,view), rect, 100, ExplosionAnimator.DEFAULT_DURATION, particle,0);
+        explode(Utils.createBitmapFromView(context,view), rect, ExplosionAnimator.DEFAULT_DELAY_TIME, ExplosionAnimator.DEFAULT_DURATION, particle,0);
     }
 
 
@@ -79,13 +77,12 @@ public class ExplosionField extends View {
 
 
 
-    public void explode(int x,int y,Particle particle){
+    public void explode(Context context,View view,int x,int y,Particle particle){
 
-        Rect rect = new Rect(x-200,y-200,x+200,y+200);
+        Rect rect = new Rect(x-120,y-120,x+120,y+120);
         int contentTop = ((ViewGroup)getParent()).getTop();
-        rect.offset(0, -contentTop );//去掉状态栏高度和标题栏高度
-
-        explode(null, rect, 100, 2000, particle,1);
+        rect.offset(0, -contentTop );
+        explode(Utils.createBitmapFromView(context,view), rect, ExplosionAnimator.DEFAULT_DELAY_TIME, 2000, particle,0);
     }
 
 

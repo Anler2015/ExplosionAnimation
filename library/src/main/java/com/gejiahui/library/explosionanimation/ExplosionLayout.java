@@ -21,6 +21,7 @@ public class ExplosionLayout extends FrameLayout {
     private ViewGroup backLayout;
     private boolean wantToSwap = false;
     private OnDeleteListener mDeleteListener;
+    private Context mContext;
     public interface OnDeleteListener{
         void onDelete();
     }
@@ -37,7 +38,7 @@ public class ExplosionLayout extends FrameLayout {
     public ExplosionLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mExplosionField = ExplosionField.attach2Window((Activity)context);
-
+        mContext = context;
     }
 
 
@@ -75,7 +76,7 @@ public class ExplosionLayout extends FrameLayout {
                 scrollX = firstX - mX;
                 if(wantToSwap == true && scrollX >0){
                     if(mX >= 0 && mY >= 0 && mY <= backLayout.getHeight()) {
-                        mExplosionField.explode((int) event.getRawX(), (int) event.getRawY(), new LeftParticle());
+                        mExplosionField.explode(mContext,backLayout ,(int) event.getRawX(), (int) event.getRawY(), new LeftParticle());
                     }
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }

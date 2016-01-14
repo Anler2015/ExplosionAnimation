@@ -21,13 +21,14 @@ import java.util.Random;
 public class ExplosionAnimator extends ValueAnimator {
 
     static long DEFAULT_DURATION = 1200;
+    static long DEFAULT_DELAY_TIME = 100;
     private static final Interpolator DEFAULT_INTERPOLATOR = new AccelerateInterpolator(0.6f);
     private static final float END_VALUE = 1.4f;
     private static final float X = Utils.dp2px(5);
     private static final float Y = Utils.dp2px(20);
     private static final float V = Utils.dp2px(2);
     private static final float W = Utils.dp2px(1);
-    private int partLen =15;
+    private int partLen = 2;
     private int partLenForTouch =2;
     private Paint mPaint;
     private Particle[][] mParticles ;
@@ -54,8 +55,8 @@ public class ExplosionAnimator extends ValueAnimator {
         else{
            parts = partLenForTouch;
         }
-        w = mBound.width() / (parts+2);
-        h = mBound.height() / (parts+2) ;
+        w = bitmap.getWidth() / (parts+2);
+        h = bitmap.getHeight() / (parts+2) ;
         mParticles = new Particle[parts][parts];
         for (int i = 0; i < parts; i++) {
             for (int j = 0; j < parts; j++) {

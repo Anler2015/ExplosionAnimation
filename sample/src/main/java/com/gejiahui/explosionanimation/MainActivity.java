@@ -11,11 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.gejiahui.library.explosionanimation.ExplosionField;
 import com.gejiahui.library.explosionanimation.particle.ExplodeParticle;
 import com.gejiahui.library.explosionanimation.particle.FlyAwayParticle;
@@ -23,7 +21,6 @@ import com.gejiahui.library.explosionanimation.particle.RightParticle;
 
 
 import java.util.ArrayList;
-
 
 
 /**
@@ -54,26 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void addListener(View root) {
-        if (root instanceof ViewGroup) {
-            ViewGroup parent = (ViewGroup) root;
-            for (int i = 0; i < parent.getChildCount(); i++) {
-                addListener(parent.getChildAt(i));
-            }
-        } else {
-            root.setClickable(true);
-            root.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mExplosionField.explode(MainActivity.this,v, new FlyAwayParticle());
-                    v.setOnClickListener(null);
-                }
-            });
-        }
-    }
-
-
-
+    
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
