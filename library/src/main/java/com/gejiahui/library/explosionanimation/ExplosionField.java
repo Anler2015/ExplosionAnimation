@@ -57,11 +57,11 @@ public class ExplosionField extends View {
         });
         animator.start();
         view.animate().alpha(0).scaleY(0).scaleX(0).setStartDelay(100).setDuration(150).start();
-        explode(Utils.createBitmapFromView(context,view), rect, ExplosionAnimator.DEFAULT_DELAY_TIME, ExplosionAnimator.DEFAULT_DURATION, particle,0);
+        explode(Utils.createBitmapFromView(context,view), rect, Constant.DEFAULT_DELAY_TIME, Constant.DEFAULT_DURATION, particle, Constant.Mode.view);
     }
 
 
-    private void explode(Bitmap bitmap, Rect bound, long startDelay, long duration,Particle particle,int mode) {
+    private void explode(Bitmap bitmap, Rect bound, long startDelay, long duration,Particle particle,Constant.Mode mode) {
         final ExplosionAnimator explosion = new ExplosionAnimator(this, bitmap, bound,particle,mode);
         explosion.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -76,13 +76,11 @@ public class ExplosionField extends View {
     }
 
 
-
     public void explode(Context context,View view,int x,int y,Particle particle){
-
         Rect rect = new Rect(x-120,y-120,x+120,y+120);
         int contentTop = ((ViewGroup)getParent()).getTop();
         rect.offset(0, -contentTop );
-        explode(Utils.createBitmapFromView(context,view), rect, ExplosionAnimator.DEFAULT_DELAY_TIME, 2000, particle,0);
+        explode(Utils.createBitmapFromView(context,view), rect, Constant.DEFAULT_DELAY_TIME, Constant.DEFAULT_TOUCH_DURATION, particle,Constant.Mode.touch);
     }
 
 

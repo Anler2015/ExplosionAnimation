@@ -17,10 +17,10 @@ import android.widget.TextView;
 import com.gejiahui.library.explosionanimation.ExplosionField;
 import com.gejiahui.library.explosionanimation.particle.ExplodeParticle;
 import com.gejiahui.library.explosionanimation.particle.FlyAwayParticle;
+import com.gejiahui.library.explosionanimation.particle.LeftParticle;
 import com.gejiahui.library.explosionanimation.particle.RightParticle;
 
 
-import java.util.ArrayList;
 
 
 /**
@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView img1;
     TextView img2;
     ImageView img3;
-    private ArrayList<Fragment> list = new ArrayList<Fragment>();
-
+    LinearLayout layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         img1 = (ImageView) findViewById(R.id.img1);
         img2 = (TextView) findViewById(R.id.img2);
         img3 = (ImageView) findViewById(R.id.img3);
-        LinearLayout layout = (LinearLayout)findViewById(R.id.layout);
-        mExplosionField = ExplosionField.attach2Window(this);
+        layout = (LinearLayout)findViewById(R.id.layout);
+        
         img1.setOnClickListener(clickListener);
         img2.setOnClickListener(clickListener);
         img3.setOnClickListener(clickListener);
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    
+
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
@@ -60,14 +59,13 @@ public class MainActivity extends AppCompatActivity {
                     mExplosionField.explode(MainActivity.this, v, new RightParticle());
                     break;
                 case R.id.img2:
-                    mExplosionField.explode(MainActivity.this, v, new ExplodeParticle());
+                    mExplosionField.explode(MainActivity.this, v, new FlyAwayParticle());
                     break;
                 case R.id.img3:
                     mExplosionField.explode(MainActivity.this, v, new ExplodeParticle());
                     break;
                 case R.id.layout:
-                    mExplosionField.explode(MainActivity.this, v, new ExplodeParticle());
-
+                    mExplosionField.explode(MainActivity.this, v, new LeftParticle());
                     break;
             }
             ValueAnimator valueAnimator = new ValueAnimator().ofFloat(1).setDuration(1700);

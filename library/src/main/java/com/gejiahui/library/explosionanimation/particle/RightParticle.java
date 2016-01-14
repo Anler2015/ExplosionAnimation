@@ -8,7 +8,7 @@ import java.util.Random;
  * Created by gejiahui on 2015/12/30.
  */
 public class RightParticle extends Particle {
-    private static final float V = Utils.dp2px(2);
+    private final float V = Utils.dp2px(2);
     Random random = new Random(System.currentTimeMillis());
     int stand ;
     @Override

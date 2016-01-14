@@ -6,7 +6,7 @@ import com.gejiahui.library.explosionanimation.Utils;
  * Created by gejiahui on 2015/12/29.
  */
 public class ExplodeParticle extends Particle {
-    private static final float V = Utils.dp2px(2);
+    private final float V = Utils.dp2px(2);
 
     public ExplodeParticle() {
     }
