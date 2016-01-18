@@ -1,6 +1,9 @@
 package com.gejiahui.explosionanimation;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +24,7 @@ import com.gejiahui.library.explosionanimation.ExplosionLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by gejiahui on 2016/1/6.
@@ -27,7 +32,9 @@ import java.util.List;
 public class ListActivity extends Activity {
     private ListView list;
     private List<String> mDatas;
+    private List<Integer> mColor;
     private ExplosionField mExplosionField;
+    Random random = new Random();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +57,10 @@ public class ListActivity extends Activity {
 
     private void initData(){
         mDatas = new ArrayList<String>();
-        for(int i = 0 ; i < 20 ; i++){
-
-            mDatas.add("This is "+ i +" item ");
+        mColor = new ArrayList<Integer>();
+        for(int i =1; i <20 ; i++){
+            mDatas.add("This is " + i +" item ");
+            mColor.add(Color.rgb(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
         }
     }
 
@@ -106,6 +114,7 @@ public class ListActivity extends Activity {
                         @Override
                         public void onAnimationEnd(Animation animation) {
                             mDatas.remove(position);
+                            mColor.remove(position);
                             notifyDataSetChanged();
                         }
 
@@ -119,6 +128,7 @@ public class ListActivity extends Activity {
                 }
             });
             txt.setText(mDatas.get(position));
+            txt.setBackgroundColor(mColor.get(position));
             return view;
         }
     }
