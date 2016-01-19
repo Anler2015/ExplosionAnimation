@@ -28,7 +28,7 @@ Use it in your activity onCreat():
 ###### Step 2
 Then use the explode(Context context, View view,Particle particle) to explode your View.
 ```java
-    mExplosionField.explode(MainActivity.this, v, new ExplodeParticle());
+    mExplosionField.explode(MainActivity.this, view, new ExplodeParticle());
 ```	
 And you can explode all of views even the groupviews.
 I make some particles like 
@@ -59,9 +59,9 @@ And you need to implement advance(float fraction) and newInstance().
 ```	
 
 ##### Use ExplosionLayout
-There are some things you should be known, when you are creating ExplosionLayout.
-1. There must be one childview.
-2. You need to use ExplosionLayout in you listview item xml.
+There are some things you should be known, when you are creating ExplosionLayout.</br> 
+1. There must be one childview.</br> 
+2. You need to use ExplosionLayout in you listview item xml.</br> 
 ###### Step 1
 Create a ExplosionLayout.
 ```xml
