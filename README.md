@@ -89,7 +89,7 @@ like this:
             });
 ```	
 
-I know my English is poor , and think you to watch this README.md. You can see more details by loaddown the code.
+I know my English is poor , and think you to watch this README.md. You can see more details by download the code.
 
 ---
 ### About me
