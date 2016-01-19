@@ -21,22 +21,22 @@ I refactored the project, and you can implement your particles easily. And I als
 
 ###### Step 1
 
-Use it in your activity onCreat():
+Use it in your activity 'onCreat()':
 ```java
     ExplosionField mExplosionField = ExplosionField.attach2Window(this);
 ```	
 ###### Step 2
-Then use the explode(Context context, View view,Particle particle) to explode your View.
+Then use the 'explode(Context context, View view,Particle particle)' to explode your View.
 ```java
     mExplosionField.explode(MainActivity.this, view, new ExplodeParticle());
 ```	
 And you can explode all of views even the groupviews.
-I make some particles like 
+I made some particles like 
 `ExplodeParticle`
 `FlyAwayParticle`
 `RightParticle`
 `LeftParticle`.</br> 
-And you also can make your own particles by Defiing their moving.
+And you also can make your own particles by defining their moving.
 ##### Make your own particles
 ###### Step 1
 Extends the class `Particle`
@@ -46,7 +46,7 @@ Extends the class `Particle`
    }
 ```	
 ###### Step 2
-And you need to implement advance(float fraction) and newInstance().
+And you need to implement 'advance(float fraction)' and 'newInstance()'.
 ```java
     public void advance(float fraction) {
       ...
@@ -59,11 +59,11 @@ And you need to implement advance(float fraction) and newInstance().
 ```	
 
 ##### Use ExplosionLayout
-There are some things you should be known, when you are creating ExplosionLayout.</br> 
+There are some things you should be known, when you are creating 'ExplosionLayout'.</br> 
 1. There must be one childview.</br> 
-2. You need to use ExplosionLayout in you listview item xml.</br> 
+2. You need to use 'ExplosionLayout' in you listview item xml.</br> 
 ###### Step 1
-Create a ExplosionLayout.
+Create a 'ExplosionLayout'.
 ```xml
 <com.gejiahui.library.explosionanimation.ExplosionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
@@ -77,7 +77,7 @@ Create a ExplosionLayout.
 ```	
 
 ###### Step 1
-Implement ExplosionLayout.OnDeleteListener() in your listview adapter.
+Implement 'ExplosionLayout.OnDeleteListener()' in your listview adapter.
 like this:
 ```Java
  Viewgroup.setOnDeleteListener(new ExplosionLayout.OnDeleteListener() {
