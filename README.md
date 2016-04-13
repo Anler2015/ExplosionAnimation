@@ -94,7 +94,7 @@ I know my English is poor , and thank you to watch this README.md. You can see m
 ---
 ### About me
 
-I am an anroid developer in China.
+I am an android developer in China.
 
 
 
